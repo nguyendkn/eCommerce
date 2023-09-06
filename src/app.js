@@ -9,20 +9,20 @@ const app = express();
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(compression());
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 
 // init database
 require("./database/init");
-const { checkOverload } = require("./helpers/check.connect");
-checkOverload();
+// const { checkOverload } = require("./helpers/check.connect");
+// checkOverload();
 
 // init routes
-app.get("/", (req, res, next) => {
-  const compress = "hello world";
-  return res.status(200).json({
-    message: "hello world",
-    metadata: compress.repeat(10000),
-  });
-});
+app.use("/", require("./routes"));
 
 //handling error
 

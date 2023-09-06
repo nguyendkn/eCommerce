@@ -3,7 +3,7 @@
 const mongoose = require("mongoose");
 const os = require("os");
 const process = require("process");
-const COUNTER = 5000;
+const COUNTER = 60000;
 
 // count connnections
 const connections = () => {
