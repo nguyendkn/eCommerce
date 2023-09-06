@@ -5,12 +5,14 @@ const morgan = require("morgan");
 const app = express();
 
 // init middlewares
-app.use(morgan("dev")) /* DEVELOPMENT */;
-// app.use(morgan("combined")) /* PRODUCTION */;
+app.use(morgan("dev"));
 app.use(helmet());
 app.use(compression());
 
 // init database
+require("./database/init");
+const { checkOverload } = require("./helpers/check.connect");
+checkOverload();
 
 // init routes
 app.get("/", (req, res, next) => {
